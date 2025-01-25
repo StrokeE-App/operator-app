@@ -15,7 +15,7 @@ export default function Dashboard() {
 
 			{/* Main Content */}
 			<div className="mt-12 px-4 flex flex-col items-center w-full">
-				<h1 className="text-3xl font-bold text-gray-900 mb-8">En proceso</h1>
+				<h1 className="text-3xl font-bold text-gray-900 mb-8 text-center">Emergencias a verificar</h1>
 
 				{/* Patient Information */}
 				{emergenciesList.map((emergency) => (
