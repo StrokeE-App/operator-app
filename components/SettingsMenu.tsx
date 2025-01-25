@@ -1,6 +1,6 @@
 'use client';
 
-import {Settings, X} from 'lucide-react';
+import {Menu, X} from 'lucide-react';
 import {useState, useEffect} from 'react';
 import {SignOut} from '@/firebase/config';
 
@@ -31,8 +31,8 @@ export default function SettingsMenu() {
 		<>
 			{/* Settings Button */}
 			<div onClick={() => setIsOpen(true)} className="flex items-center gap-2 text-customRed cursor-pointer z-20">
-				<Settings className="w-8 h-8" />
-				<span className="text-lg font-medium">Configuración</span>
+				<Menu className="w-8 h-8" />
+				<span className="text-lg font-medium">Menú</span>
 			</div>
 
 			{/* Overlay */}
@@ -47,7 +47,7 @@ export default function SettingsMenu() {
 				{/* Panel Header */}
 				<div className="relative bg-customRed text-white p-6">
 					<h2 className="text-2xl font-medium">Hola,</h2>
-					<p className="text-2xl font-black">Paramédico!</p>
+					<p className="text-2xl font-black">Operador!</p>
 					<X onClick={() => setIsOpen(false)} className="absolute top-6 right-6 w-6 h-6 cursor-pointer" />
 				</div>
 
