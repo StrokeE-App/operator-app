@@ -1,13 +1,38 @@
 'use client';
 
-// Mocks
-import {emergenciesList} from '@/mocks/emergency';
-
 // Components
 import EmergencyCard from '@/components/EmergencyCard';
 import SettingsMenu from '@/components/SettingsMenu';
 
+// Hooks
+import {useSseEvents} from '@/hooks/useSseEvents';
+
+// Types
+import {EmergencyInfo} from '@/types';
+
 export default function Dashboard() {
+	const {data, isConnected, error} = useSseEvents<EmergencyInfo[]>({
+		url: `${process.env.NEXT_PUBLIC_NOTIFICATION_BACKEND_URL}/operator-notification/emergencies-patients`,
+	});
+
+	console.log({data, isConnected, error});
+
+	if (!data) {
+		return (
+			<main className="min-h-screen bg-white p-4">
+				{/* Header */}
+				<SettingsMenu />
+
+				{/* Main Content */}
+				<div className="mt-12 px-4 flex flex-col items-center w-full">
+					<h1 className="text-3xl font-bold text-gray-900 mb-8 text-center">Emergencias a verificar</h1>
+					<p className="text-gray-600">Cargando emergencias...</p>
+					{/* <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-customRed"></div> */}
+				</div>
+			</main>
+		);
+	}
+
 	return (
 		<main className="min-h-screen bg-white p-4">
 			{/* Header */}
@@ -18,8 +43,13 @@ export default function Dashboard() {
 				<h1 className="text-3xl font-bold text-gray-900 mb-8 text-center">Emergencias a verificar</h1>
 
 				{/* Patient Information */}
-				{emergenciesList.map((emergency) => (
-					<EmergencyCard key={emergency.emergencyId} userName={emergency.userName} userPhone={emergency.userPhone} emergencyId={emergency.emergencyId} />
+				{data.map((emergency) => (
+					<EmergencyCard
+						key={emergency.emergencyId}
+						userName={`${emergency.patient.firstName} ${emergency.patient.lastName}`}
+						userPhone={emergency.patient.phoneNumber}
+						emergencyId={emergency.emergencyId}
+					/>
 				))}
 			</div>
 		</main>
