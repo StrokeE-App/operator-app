@@ -1,16 +1,21 @@
 import {useRouter} from 'next/navigation';
 
+// Types
+import { EmergencyInfo } from '@/types';
+
 interface EmergencyCardProps {
 	userName: string;
 	userPhone: string;
 	emergencyId: string;
+	emergency: EmergencyInfo; // Replace 'any' with the proper type if available
 }
 
-export default function EmergencyCard({userName, userPhone, emergencyId}: EmergencyCardProps) {
+export default function EmergencyCard({userName, userPhone, emergencyId, emergency}: EmergencyCardProps) {
 	const router = useRouter();
 
 	const handleClick = () => {
-		router.push(`/emergency/${emergencyId}`);
+		const serialized = encodeURIComponent(JSON.stringify(emergency));
+		router.push(`/emergency/${emergencyId}?data=${serialized}`);
 	};
 
 	return (

@@ -11,8 +11,7 @@ export function createEventSource(url: string): EventSourcePolyfill {
 	});
 
 	eventSource.onmessage = (event) => {
-		const data = JSON.parse(event.data);
-		console.log('New message:', data.data);
+		console.log('New message:', event.data);
 	};
 
 	eventSource.onerror = (error) => {

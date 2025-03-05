@@ -49,6 +49,7 @@ export default function Dashboard() {
 						userName={`${emergency.patient.firstName} ${emergency.patient.lastName}`}
 						userPhone={emergency.patient.phoneNumber}
 						emergencyId={emergency.emergencyId}
+						emergency={emergency}
 					/>
 				))}
 			</div>
