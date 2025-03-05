@@ -20,11 +20,7 @@ export default function Login() {
 		<main className="flex min-h-screen flex-col items-center justify-center p-8 gap-8">
 			<StrokeeLogo />
 
-			{isLoading ? (
-				<div className="w-6 h-6 border-2 border-customRed border-t-transparent rounded-full animate-spin" />
-			) : (
-				<LoginForm placeholder="Email" />
-			)}
+			{isLoading ? <div className="w-6 h-6 border-2 border-customRed border-t-transparent rounded-full animate-spin" /> : <LoginForm />}
 		</main>
 	);
 }

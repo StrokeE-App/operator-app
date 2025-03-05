@@ -4,11 +4,7 @@ import {useState} from 'react';
 import {SignIn} from '@/firebase/config';
 import toast from 'react-hot-toast';
 
-type LoginFormProps = {
-	placeholder?: string;
-};
-
-export function LoginForm({placeholder = 'Usuario'}: LoginFormProps) {
+export function LoginForm() {
 	const [username, setUserName] = useState('');
 	const [password, setPassword] = useState('');
 	const [isLoading, setIsLoading] = useState(false);
@@ -21,8 +17,12 @@ export function LoginForm({placeholder = 'Usuario'}: LoginFormProps) {
 		try {
 			await SignIn(username, password);
 			toast.success('¡Bienvenido!', {id: loadingToast});
-		} catch {
-			toast.error('Usuario o contraseña incorrectos', {id: loadingToast});
+		} catch (error) {
+			if (error instanceof Error) {
+				toast.error(error.message, {id: loadingToast});
+			} else {
+				toast.error('Un error inesperado ha ocurrido.', {id: loadingToast});
+			}
 		} finally {
 			setIsLoading(false);
 		}
@@ -34,7 +34,7 @@ export function LoginForm({placeholder = 'Usuario'}: LoginFormProps) {
 				<div>
 					<input
 						type="email"
-						placeholder={placeholder}
+						placeholder="Correo"
 						value={username}
 						onChange={(e) => setUserName(e.target.value)}
 						className="w-full px-4 py-3 rounded-full border border-gray-200 shadow-lg focus:outline-none focus:ring-2 focus:ring-customRed focus:border-transparent"
