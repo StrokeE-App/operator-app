@@ -4,16 +4,11 @@
 import EmergencyCard from '@/components/EmergencyCard';
 import SettingsMenu from '@/components/SettingsMenu';
 
-// Hooks
-import {useSseEvents} from '@/hooks/useSseEvents';
-
-// Types
-import {EmergencyInfo} from '@/types';
+// Context
+import {useSseContext} from '@/context/SseContext';
 
 export default function Dashboard() {
-	const {data, isConnected, error} = useSseEvents<EmergencyInfo[]>({
-		url: `${process.env.NEXT_PUBLIC_NOTIFICATION_BACKEND_URL}/operator-notification/emergencies-patients`,
-	});
+	const {emergencies: data, isConnected, error} = useSseContext();
 
 	console.log({data, isConnected, error});
 
@@ -49,6 +44,7 @@ export default function Dashboard() {
 						userName={`${emergency.patient.firstName} ${emergency.patient.lastName}`}
 						userPhone={emergency.patient.phoneNumber}
 						emergencyId={emergency.emergencyId}
+						emergency={emergency}
 					/>
 				))}
 			</div>
