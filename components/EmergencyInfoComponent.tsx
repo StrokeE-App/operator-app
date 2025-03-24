@@ -1,6 +1,10 @@
 'use client';
 
+// Types
 import {EmergencyInfo} from '@/types';
+
+// Utils
+import {formatDate} from '@/utils/functions';
 
 type EmergencyInfoProps = {
 	emergency: EmergencyInfo | null;
@@ -20,32 +24,6 @@ export default function EmergencyInfoComponent({emergency}: EmergencyInfoProps) 
 			</>
 		);
 	}
-
-	const formatDate = (date: Date | string | null | undefined) => {
-		if (!date) return 'Ahorita';
-
-		try {
-			// Convert string to Date if it's a string
-			const dateObj = typeof date === 'string' ? new Date(date) : date;
-
-			// Check if dateObj is a valid date
-			if (isNaN(dateObj.getTime())) {
-				throw new Error('Invalid date');
-			}
-
-			return new Intl.DateTimeFormat('es-CO', {
-				year: 'numeric',
-				month: 'short',
-				day: 'numeric',
-				hour: '2-digit',
-				minute: '2-digit',
-				second: '2-digit',
-			}).format(dateObj);
-		} catch (error) {
-			console.error('Error formatting date:', error, 'Original value:', date);
-			return 'Fecha desconocida';
-		}
-	};
 
 	const readableStartDate = formatDate(emergency.startDate);
 	const {firstName, lastName, phoneNumber, age, weight, height} = emergency.patient;
@@ -75,11 +53,11 @@ export default function EmergencyInfoComponent({emergency}: EmergencyInfoProps) 
 						<h2 className="text-custom-black text-sm font-bold">Estatura</h2>
 						<p className="text-custom-black font-medium">{height} m</p>
 					</div>
-					<div>
+					{/* 					<div>
 						<h2 className="text-custom-black text-sm font-bold">Nivel De Stroke</h2>
 						<p className="text-custom-black font-medium">{emergency.nihScale ? emergency.nihScale : '...'}</p>
-					</div>
-					<div>
+					</div> */}
+					<div className="col-span-2">
 						<h2 className="text-custom-black text-sm font-bold whitespace-wrap">Tiempo desde que inició la emergencia</h2>
 						<p className="text-custom-black font-medium">{readableStartDate}</p>
 					</div>
