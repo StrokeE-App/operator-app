@@ -6,8 +6,9 @@ import React, {useState} from 'react';
 import Button from './Button';
 import ConfirmModal from './ConfirmModal';
 
-// Mocks
-import {mockAmbulances} from '../mocks/ambulances';
+// Context
+import {useAmbulances} from '@/contexts/AmbulancesContext';
+
 import apiClient from '@/api/apiClient';
 import toast from 'react-hot-toast';
 import {useRouter} from 'next/navigation';
@@ -21,6 +22,7 @@ export default function ConfirmStrokeComponent({emergencyId}: ConfirmStrokeCompo
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [modalTitle, setModalTitle] = useState('');
 	const [actionType, setActionType] = useState('');
+	const {ambulances, isLoading, error} = useAmbulances();
 
 	const router = useRouter();
 
@@ -66,22 +68,37 @@ export default function ConfirmStrokeComponent({emergencyId}: ConfirmStrokeCompo
 
 	// Open the modal with the title and action type
 	const openModal = (title: string, action: string) => {
-		setModalTitle(title); //
+		if (action === 'confirm' && error) {
+			toast.error('Error al cargar las ambulancias. Por favor, intente nuevamente.');
+			return;
+		}
+		setModalTitle(title);
 		setActionType(action);
 		setIsModalOpen(true);
 	};
 
 	return (
 		<div className="w-10/12 max-w-md mx-auto flex flex-col space-y-4 mb-5">
-			<Button title="Confirmar Stroke" onClick={() => openModal('Asigna una ambulancia a la emergencia', 'confirm')} color="red" />
-			<Button title="Descartar Stroke" onClick={() => openModal('¿Estás seguro que quieres descartar el stroke?', 'discard')} color="green" />
+			<Button
+				title="Confirmar Stroke"
+				onClick={() => openModal('Asigna una ambulancia a la emergencia', 'confirm')}
+				color="red"
+				disabled={isLoading || error !== null}
+			/>
+			<Button
+				title="Descartar Stroke"
+				onClick={() => openModal('¿Estás seguro que quieres descartar el stroke?', 'discard')}
+				color="green"
+				disabled={isLoading}
+			/>
 			<ConfirmModal
 				isOpen={isModalOpen}
 				onClose={() => setIsModalOpen(false)}
 				onConfirm={handleConfirm}
 				title={modalTitle}
 				showDropdown={actionType === 'confirm'}
-				ambulances={mockAmbulances}
+				ambulances={ambulances}
+				// isLoading={isLoading}
 			/>
 		</div>
 	);
