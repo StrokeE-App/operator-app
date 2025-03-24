@@ -11,6 +11,7 @@ import {mockAmbulances} from '../mocks/ambulances';
 import apiClient from '@/api/apiClient';
 import toast from 'react-hot-toast';
 import {useRouter} from 'next/navigation';
+import {AxiosError} from 'axios';
 
 export type ConfirmStrokeComponentProps = {
 	emergencyId: string;
@@ -36,7 +37,11 @@ export default function ConfirmStrokeComponent({emergencyId}: ConfirmStrokeCompo
 				toast.success('Emergencia confirmada exitosamente', {id: loadingToast});
 				router.push('/dashboard');
 			} catch (error) {
-				toast.error('Error al confirmar la emergencia', {id: loadingToast});
+				if (error instanceof AxiosError) {
+					toast.error(error.response?.data.message, {id: loadingToast});
+				} else {
+					toast.error('Error al confirmar la emergencia', {id: loadingToast});
+				}
 				console.error('Error confirming emergency:', error);
 			}
 		} else if (actionType === 'discard') {
@@ -48,7 +53,11 @@ export default function ConfirmStrokeComponent({emergencyId}: ConfirmStrokeCompo
 				toast.success('Emergencia descartada exitosamente', {id: loadingToast});
 				router.push('/dashboard');
 			} catch (error) {
-				toast.error('Error al descartar la emergencia', {id: loadingToast});
+				if (error instanceof AxiosError) {
+					toast.error(error.response?.data.message, {id: loadingToast});
+				} else {
+					toast.error('Error al descartar la emergencia', {id: loadingToast});
+				}
 				console.error('Error discarding emergency:', error);
 			}
 		}
