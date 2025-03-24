@@ -4,6 +4,7 @@ import './globals.css';
 import {AuthProvider} from '@/context/AuthContext';
 import {SseProvider} from '@/context/SseContext';
 import {Toaster} from 'react-hot-toast';
+import {AmbulancesProvider} from '@/contexts/AmbulancesContext';
 
 const geistSans = Geist({
 	variable: '--font-geist-sans',
@@ -29,7 +30,9 @@ export default function RootLayout({
 		<html lang="es">
 			<body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-customWhite`}>
 				<SseProvider>
-					<AuthProvider>{children}</AuthProvider>
+					<AuthProvider>
+						<AmbulancesProvider>{children}</AmbulancesProvider>
+					</AuthProvider>
 					<Toaster position="top-center" />
 				</SseProvider>
 			</body>
