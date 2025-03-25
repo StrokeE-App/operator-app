@@ -1,21 +1,26 @@
 {
-	"name": "StrokeE - Paramedic App",
-	"short_name": "StrokeE-paramedic",
-	"description": "Emergency response system for paramedics",
+	"name": "StrokeE - Operator App",
+	"short_name": "StrokeE-operator",
+	"description": "Emergency response system for operators",
 	"start_url": "/",
 	"display": "standalone",
 	"background_color": "#ffffff",
 	"theme_color": "#000000",
+	"orientation": "portrait",
+	"scope": "/",
+	"prefer_related_applications": false,
 	"icons": [
 		{
-			"src": "/icon-192x192.png",
+			"src": "/strokee-192x192.png",
 			"sizes": "192x192",
-			"type": "image/png"
+			"type": "image/png",
+			"purpose": "any maskable"
 		},
 		{
-			"src": "/icon-512x512.png",
+			"src": "/strokee-512x512.png",
 			"sizes": "512x512",
-			"type": "image/png"
+			"type": "image/png",
+			"purpose": "any maskable"
 		}
 	]
 }
