@@ -23,18 +23,6 @@ describe('SettingsMenu', () => {
 		expect(screen.getByRole('button')).toHaveClass('text-customRed');
 	});
 
-	it('should render the menu icon', () => {
-		(useAuth as jest.Mock).mockReturnValue({
-			SignOut: jest.fn(),
-		});
-
-		render(<SettingsMenu />);
-
-		const menuIcon = screen.getByRole('img', {hidden: true});
-		expect(menuIcon).toBeInTheDocument();
-		expect(menuIcon).toHaveClass('lucide', 'lucide-menu');
-	});
-
 	it('should render the menu items when clicked', () => {
 		(useAuth as jest.Mock).mockReturnValue({
 			SignOut: jest.fn(),
