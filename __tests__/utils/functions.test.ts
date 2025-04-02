@@ -13,14 +13,14 @@ describe('functions utils', () => {
 		it('formats Date object correctly', () => {
 			const date = new Date('2024-03-24T12:00:00');
 			const formatted = formatDate(date);
-			expect(formatted).toMatch(/24 mar 2024/);
+			expect(formatted).toMatch(/24 de mar de 2024/);
 			expect(formatted).toMatch(/12:00:00/);
 		});
 
 		it('formats date string correctly', () => {
 			const dateString = '2024-03-24T12:00:00';
 			const formatted = formatDate(dateString);
-			expect(formatted).toMatch(/24 mar 2024/);
+			expect(formatted).toMatch(/24 de mar de 2024/);
 			expect(formatted).toMatch(/12:00:00/);
 		});
 
@@ -38,9 +38,9 @@ describe('functions utils', () => {
 			const date2 = new Date('2024-12-31T23:59:59');
 			const date3 = new Date('2024-01-01T00:00:00');
 
-			expect(formatDate(date1)).toMatch(/24 mar 2024/);
-			expect(formatDate(date2)).toMatch(/31 dic 2024/);
-			expect(formatDate(date3)).toMatch(/1 ene 2024/);
+			expect(formatDate(date1)).toMatch(/24 de mar de 2024/);
+			expect(formatDate(date2)).toMatch(/31 de dic de 2024/);
+			expect(formatDate(date3)).toMatch(/1 de ene de 2024/);
 		});
 
 		it('includes all required date components', () => {

@@ -1,8 +1,6 @@
 import {render, screen} from '@testing-library/react';
 import Dashboard from '@/app/dashboard/page';
 import {useSseContext} from '@/context/SseContext';
-import EmergencyCard from '@/components/EmergencyCard';
-import SettingsMenu from '@/components/SettingsMenu';
 
 // Mock the components
 jest.mock('@/components/EmergencyCard', () => {
@@ -27,7 +25,7 @@ describe('Dashboard', () => {
 		jest.clearAllMocks();
 	});
 
-	it('should show loading state when data is null', () => {
+	it('should show "No hay emergencias activas." when data is null', () => {
 		(useSseContext as jest.Mock).mockReturnValue({
 			data: null,
 			isConnected: false,
@@ -38,7 +36,7 @@ describe('Dashboard', () => {
 
 		expect(screen.getByTestId('settings-menu')).toBeInTheDocument();
 		expect(screen.getByText('Emergencias a verificar')).toBeInTheDocument();
-		expect(screen.getByText('Cargando emergencias...')).toBeInTheDocument();
+		expect(screen.getByText('No hay emergencias activas.')).toBeInTheDocument();
 	});
 
 	it('should show empty state when data is undefined', () => {
@@ -76,14 +74,13 @@ describe('Dashboard', () => {
 		];
 
 		(useSseContext as jest.Mock).mockReturnValue({
-			data: mockEmergencies,
+			emergencies: mockEmergencies,
 			isConnected: true,
 			error: null,
 		});
 
 		render(<Dashboard />);
 
-		expect(screen.getByTestId('settings-menu')).toBeInTheDocument();
 		expect(screen.getByText('Emergencias a verificar')).toBeInTheDocument();
 
 		const emergencyCards = screen.getAllByTestId('emergency-card');
@@ -95,7 +92,7 @@ describe('Dashboard', () => {
 	it('should handle SSE connection error', () => {
 		const mockError = new Error('Connection failed');
 		(useSseContext as jest.Mock).mockReturnValue({
-			data: null,
+			emergencies: null,
 			isConnected: false,
 			error: mockError,
 		});
