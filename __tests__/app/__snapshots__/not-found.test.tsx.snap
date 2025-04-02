@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Custom404 matches snapshot 1`] = `
+<div>
+  <div
+    class="flex flex-col items-center justify-center h-screen"
+  >
+    <div
+      data-testid="strokee-logo"
+    >
+      Strokee Logo
+    </div>
+    <br />
+    <h1
+      class="text-customRed text-4xl font-bold"
+    >
+      Oops
+    </h1>
+    <h2
+      class="text-customRed text-2xl font-bold"
+    >
+      404 - No fue posible encontrar esta pagina :(
+    </h2>
+    <p
+      class="text-customRed"
+    >
+      Regresa al Login para continuar navegando: 
+      <a
+        class="underline decoration-1"
+        href="/login"
+      >
+        Login
+      </a>
+    </p>
+  </div>
+</div>
+`;

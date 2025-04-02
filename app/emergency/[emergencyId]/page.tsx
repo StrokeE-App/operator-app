@@ -3,7 +3,7 @@
 import React, {useState, useEffect} from 'react';
 import {useSearchParams} from 'next/navigation';
 import Link from 'next/link';
-import dynamic from 'next/dynamic';
+// import dynamic from 'next/dynamic';
 import {ArrowBigLeft} from 'lucide-react';
 
 // Types
@@ -12,9 +12,9 @@ import {EmergencyInfo} from '@/types';
 // Context
 import {useSseContext} from '@/context/SseContext';
 
-const DynamicMap = dynamic(() => import('@/components/Map'), {
-	ssr: false,
-});
+// const DynamicMap = dynamic(() => import('@/components/Map'), {
+// 	ssr: false,
+// });
 
 // Components
 import EmergencyInfoComponent from '@/components/EmergencyInfoComponent';
@@ -99,7 +99,7 @@ export default function EmergencyClientPage({params}: {params: Promise<{emergenc
 				<>
 					{' '}
 					<EmergencyInfoComponent emergency={emergency} />
-					<DynamicMap latitude={3.382325} longitude={-76.528043} />
+					{/* <DynamicMap latitude={3.382325} longitude={-76.528043} /> */}
 					<ConfirmStrokeComponent emergencyId={emergencyId} />
 				</>
 			)}
