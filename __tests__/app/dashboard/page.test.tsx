@@ -30,6 +30,8 @@ describe('Dashboard', () => {
 			data: null,
 			isConnected: false,
 			error: null,
+			connect: jest.fn(),
+			disconnect: jest.fn(),
 		});
 
 		render(<Dashboard />);
@@ -44,6 +46,8 @@ describe('Dashboard', () => {
 			data: undefined,
 			isConnected: true,
 			error: null,
+			connect: jest.fn(),
+			disconnect: jest.fn(),
 		});
 
 		render(<Dashboard />);
@@ -77,6 +81,8 @@ describe('Dashboard', () => {
 			emergencies: mockEmergencies,
 			isConnected: true,
 			error: null,
+			connect: jest.fn(),
+			disconnect: jest.fn(),
 		});
 
 		render(<Dashboard />);
@@ -95,6 +101,8 @@ describe('Dashboard', () => {
 			emergencies: null,
 			isConnected: false,
 			error: mockError,
+			connect: jest.fn(),
+			disconnect: jest.fn(),
 		});
 
 		render(<Dashboard />);
@@ -116,6 +124,8 @@ describe('Dashboard', () => {
 			data: undefined,
 			isConnected: true,
 			error: null,
+			connect: jest.fn(),
+			disconnect: jest.fn(),
 		});
 		rerender(<Dashboard />);
 
@@ -136,6 +146,8 @@ describe('Dashboard', () => {
 			],
 			isConnected: true,
 			error: null,
+			connect: jest.fn(),
+			disconnect: jest.fn(),
 		});
 		rerender(<Dashboard />);
 
