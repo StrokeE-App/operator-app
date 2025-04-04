@@ -6,9 +6,20 @@ import SettingsMenu from '@/components/SettingsMenu';
 
 // Context
 import {useSseContext} from '@/context/SseContext';
+import {useEffect} from 'react';
 
 export default function Dashboard() {
-	const {emergencies: data, isConnected, error} = useSseContext();
+	const {emergencies: data, isConnected, error, connect, disconnect} = useSseContext();
+
+	useEffect(() => {
+		// Connect when component mounts
+		connect();
+
+		// Cleanup: disconnect when component unmounts
+		return () => {
+			disconnect();
+		};
+	}, [connect, disconnect]);
 
 	console.log({data, isConnected, error});
 
