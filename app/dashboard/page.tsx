@@ -19,7 +19,7 @@ export default function Dashboard() {
 		return () => {
 			disconnect();
 		};
-	}, [connect, disconnect]);
+	}, []);
 
 	console.log({data, isConnected, error});
 
