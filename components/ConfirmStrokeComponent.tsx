@@ -82,13 +82,13 @@ export default function ConfirmStrokeComponent({emergencyId}: ConfirmStrokeCompo
 			<Button
 				title="Confirmar Stroke"
 				onClick={() => openModal('Asigna una ambulancia a la emergencia', 'confirm')}
-				color="red"
+				color="green"
 				disabled={isLoading || error !== null}
 			/>
 			<Button
 				title="Descartar Stroke"
 				onClick={() => openModal('¿Estás seguro que quieres descartar el stroke?', 'discard')}
-				color="green"
+				color="red"
 				disabled={isLoading}
 			/>
 			<ConfirmModal
