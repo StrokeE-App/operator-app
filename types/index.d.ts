@@ -13,5 +13,7 @@ export type EmergencyInfo = {
 	patient: EmergencyPatient;
 	startDate: Date;
 	nihScale?: number;
+	latitude?: number;
+	longitude?: number;
 	// emergencyLocation: {latitude: double; longitude: double};
 };
